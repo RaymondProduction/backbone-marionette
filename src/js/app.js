@@ -1,53 +1,28 @@
-var EventTracker = new Backbone.Marionette.Application();
 
-var Event = Backbone.Model.extend({});
-var Events = Backbone.Collection.extend({
-  model: Event
-});
+const template1 = _.template('<h1>Marionette says hello!</h1>');
+const template2 = _.template('<h1>You push the button!</h1>');
 
-var EventView = Backbone.Marionette.ItemView.extend({
-  template: '#eventView'
-});
+const myView1 = new Mn.View({template: template1});
+const myView2 = new Mn.View({template: template2});
 
-var NoEventsView = Backbone.Marionette.ItemView.extend({
-  template: '#noEventsView'
-});
-
-
-var EventView = Backbone.Marionette.CollectionView.extend({
-  itemView: EventView,
-  emptyView: NoEventsView
-});
-
-var FormView = Backbone.Marionette.ItemView.extend({
-  template: '#formView',
+const MyView = Mn.View.extend({
+  el: '#container',
+  template: false,
   events: {
-    'click button': 'createNewEvent'
+    'click .button': 'onClickButton'
   },
-  ui: {
-    event: '#event',
-    time: '#time'
+  regions: {
+    region1: '#region1',
+    region2: '#region2'
   },
-  createNewEvent : function() {
-    this.collection.add({
-      event: this.ui.event.val(),
-      time: this.ui.time.val()
-    });
-    this.ui.event.val("");
-    this.ui.time.val("");
+  onRender() {
+      this.showChildView('region1', myView1);
+  },
+  onClickButton() {
+    this.showChildView('region2', myView2);
   }
 });
 
-EventTracker.addRegions({
-  form : '#form',
-  list : '#list'
-});
+const myView = new MyView();
+myView.render();
 
-EventTracker.addInitializer(function(){
-  EventTracker.events = new Events();
-
-  EventTracker.form.show(new FormView({collection: EventTracker.events}));
-  EventTracker.list.show(new EventView({collection: EventTracker.events}))
-});
-
-EventTracker.start();
