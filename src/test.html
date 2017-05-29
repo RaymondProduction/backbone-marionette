@@ -27,10 +27,9 @@
   <p>Text from a different template...</p>
 </script>
 
-<script type="text/template" id="contact-template">
- <p><%- firstName %> <%- lastName %></p>
+<script type="text/template" id="contact-list-item">
+ <li><%- firstName %> <%- lastName %></li>
 </script>
-
  <!-- The javascript includes are here -->
  <script src="./js/vendor/jquery.js"></script>
  <script src="./js/vendor/json2.js"></script>
@@ -63,16 +62,27 @@ ContactManager.Contact = Backbone.Model.extend({
   }
 });
 
+ContactManager.ContactItemView = Marionette.ItemView.extend({
+  template: "#contact-list-item"
+ });
 
-ContactManager.ContactView = Marionette.ItemView.extend({
- template: "#contact-template",
- events: {
-  "click p" : "alertPhoneNumber"
- },
- alertPhoneNumber : function(){
-  alert(this.model.escape("phoneNumber"));
- }
+ContactManager.ContactsView = Marionette.CollectionView.extend({
+ tagName: "ul",
+ childView: ContactManager.ContactItemView
 });
+
+ContactManager.ContactCollection = Backbone.Collection.extend({
+ model: ContactManager.Contact
+ });
+// ContactManager.ContactView = Marionette.ItemView.extend({
+//  template: "#contact-template",
+//  events: {
+//   "click p" : "alertPhoneNumber"
+//  },
+//  alertPhoneNumber : function(){
+//   alert(this.model.escape("phoneNumber"));
+//  }
+// });
 
   ContactManager.on("before:start", function(){
     var RegionContainer = Marionette.LayoutView.extend({
@@ -85,15 +95,27 @@ ContactManager.ContactView = Marionette.ItemView.extend({
 });
 
 ContactManager.on("start", function(){
-  var contact = new ContactManager.Contact({
-   lastName: "Arten",
-   phoneNumber: "555-0184"
- });
-var contactView = new ContactManager.ContactView({
-  model: contact
- });
-
-ContactManager.regions.main.show(contactView);
+  var contacts = new ContactManager.ContactCollection([
+  {
+    firstName: "Bob",
+    lastName: "Brigham",
+    phoneNumber: "555-0163"
+  },
+  {
+    firstName: "Alice",
+    lastName: "Arten",
+    phoneNumber: "555-0184"
+  },
+  {
+    firstName: "Charlie",
+    lastName: "Campbell",
+    phoneNumber: "555-0129"
+  }
+  ]);
+  var contactsListView = new ContactManager.ContactsView({
+    collection: contacts
+  });
+  ContactManager.regions.main.show(contactsListView);
  });
 
 
