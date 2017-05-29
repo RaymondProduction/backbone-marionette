@@ -5,7 +5,7 @@ I use [files](https://marionettejs.com/downloads/backbone.marionette.tar.gz) for
 
 ## Structure:
 
-###Head
+### Head
 ```html
  <head>
  <meta charset="utf-8">
@@ -20,8 +20,8 @@ I use [files](https://marionettejs.com/downloads/backbone.marionette.tar.gz) for
 ```
 This file needs for run Marionette.
 
-###Body
+### Body
 ```html
-
+ <script src="./js/app.js"></script>
 
 ```
