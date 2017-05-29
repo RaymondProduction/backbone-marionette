@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+ <meta charset="utf-8">
+ <title>Marionette Contact Manager</title>
+ </head>
+
+<body>
+ <script type="text/template" id="static-template">
+  <p>This is text that was rendered by our Marionette app.</p>
+  <button>ok</button>
+ </script>
+
+ <script type="text/template" id="click-template">
+  <p>You is =)</p>
+  <button>Back</button>
+ </script>
+
+<div id="app-container">
+  <div id="main-region" class="container">
+    <p>Here is static content in the web page. You'll notice that it gets
+    replaced by our app as soon as we start it.</p>
+  </div>
+</div>
+
+<script type="text/template" id="different-static-template">
+  <p>Text from a different template...</p>
+</script>
+
+ <script src="./js/vendor/jquery.js"></script>
+ <script src="./js/vendor/json2.js"></script>
+ <script src="./js/vendor/underscore.js"></script>
+ <script src="./js/vendor/backbone.js"></script>
+ <script src="./js/vendor/backbone.marionette.js"></script>
+ <script type="text/javascript">
+ var ContactManager = new Marionette.Application();
+
+ ContactManager.StaticView = Marionette.ItemView.extend({
+     el: "#main-region",
+     template: "#static-template",
+     events: {
+      'click button' :'clickButton'
+    },
+    clickButton : function(){
+      console.log('click');
+      var staticView = new ContactManager.StaticView({
+        template : "#click-template"
+      });
+      staticView.render();
+    }
+  });
+
+
+ ContactManager.on("start", function(){
+  console.log('start');
+  var staticView = new ContactManager.StaticView({
+    template : "#static-template"
+  });
+  staticView.render();
+ });
+
+ ContactManager.start();
+ </script>
+ </body>
+</html>

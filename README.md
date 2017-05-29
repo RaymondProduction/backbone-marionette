@@ -1,7 +1,7 @@
 # Backbone Marionette
 Training project
 
-I use [files](https://marionettejs.com/downloads/backbone.marionette.tar.gz) for Backbone Marionette.
+I use [files](https://marionettejs.com/downloads/backbone.marionette.tar.gz) and [releases 2.4.7](https://github.com/marionettejs/backbone.marionette/archive/v2.4.7.tar.gz)for Backbone Marionette.
 
 ## Structure:
 
