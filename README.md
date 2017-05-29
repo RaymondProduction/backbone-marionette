@@ -1,4 +1,4 @@
-# Backbone Marionette I u
+# Backbone Marionette
 Training project
 
 I use [files](https://marionettejs.com/downloads/backbone.marionette.tar.gz) for Backbone Marionette.
