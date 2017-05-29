@@ -22,17 +22,16 @@ var NoEventsView = Backbone.Marionette.ItemView.extend({
   template: '#noEventsView'
 });
 
-
+// Создаем коллекцию с элементами EventView
 var EventView = Backbone.Marionette.CollectionView.extend({
-  itemView: EventView,
-  emptyView: NoEventsView,
   childView: EventView
 });
 
+// Виджет с формой
 var FormView = Backbone.Marionette.ItemView.extend({
-  template: '#formView',
+  template: '#formView',  // <= шаблон формы
   events: {
-    'click button': 'createNewEvent'
+    'click button': 'createNewEvent' //<= событие нажатия кнопки
   },
   ui: {
     event: '#event',
@@ -61,3 +60,16 @@ EventTracker.addInitializer(function(){
 });
 
 EventTracker.start();
+
+/*
+
+Routs
+
+HTML 5 - Routs
+  https://addyosmani.com/backbone-fundamentals/#routers
+
+HTML 5 - History
+  https://developer.mozilla.org/ru/docs/Web/API/History_API
+
+Gulp - task minimize and task build
+*/
