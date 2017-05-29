@@ -27,6 +27,11 @@
   <p>Text from a different template...</p>
 </script>
 
+<script type="text/template" id="contact-template">
+ <p><%- firstName %> <%- lastName %></p>
+</script>
+
+ <!-- The javascript includes are here -->
  <script src="./js/vendor/jquery.js"></script>
  <script src="./js/vendor/json2.js"></script>
  <script src="./js/vendor/underscore.js"></script>
@@ -51,13 +56,49 @@
   });
 
 
- ContactManager.on("start", function(){
-  console.log('start');
-  var staticView = new ContactManager.StaticView({
-    template : "#static-template"
-  });
-  staticView.render();
+
+ContactManager.Contact = Backbone.Model.extend({
+  defaults: {
+    firstName: ""
+  }
+});
+
+
+ContactManager.ContactView = Marionette.ItemView.extend({
+ template: "#contact-template",
+ events: {
+  "click p" : "alertPhoneNumber"
+ },
+ alertPhoneNumber : function(){
+  alert(this.model.escape("phoneNumber"));
+ }
+});
+
+  ContactManager.on("before:start", function(){
+    var RegionContainer = Marionette.LayoutView.extend({
+      el: "#app-container",
+      regions: {
+        main: "#main-region"
+      }
+    });
+    ContactManager.regions = new RegionContainer();
+});
+
+ContactManager.on("start", function(){
+  var contact = new ContactManager.Contact({
+   lastName: "Arten",
+   phoneNumber: "555-0184"
  });
+var contactView = new ContactManager.ContactView({
+  model: contact
+ });
+
+ContactManager.regions.main.show(contactView);
+ });
+
+
+
+
 
  ContactManager.start();
  </script>
