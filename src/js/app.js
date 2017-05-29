@@ -1,28 +1,63 @@
+// Создание приложения Backbone.Marionette
+var EventTracker = new Backbone.Marionette.Application();
 
-const template1 = _.template('<h1>Marionette says hello!</h1>');
-const template2 = _.template('<h1>You push the button!</h1>');
+// Приложение реализует список событий (Название и время)
 
-const myView1 = new Mn.View({template: template1});
-const myView2 = new Mn.View({template: template2});
 
-const MyView = Mn.View.extend({
-  el: '#container',
-  template: false,
+// Модель для событий
+var Event = Backbone.Model.extend({});
+// Коллекция событий
+var Events = Backbone.Collection.extend({
+  model: Event
+});
+
+// Создаем виджет с событием по шаблону eventView
+// шаблон описан в html файле
+var EventView = Backbone.Marionette.ItemView.extend({
+  template: '#eventView'
+});
+
+// Виджет на случай если нет событий по шаблону noEventsView
+var NoEventsView = Backbone.Marionette.ItemView.extend({
+  template: '#noEventsView'
+});
+
+
+var EventView = Backbone.Marionette.CollectionView.extend({
+  itemView: EventView,
+  emptyView: NoEventsView,
+  childView: EventView
+});
+
+var FormView = Backbone.Marionette.ItemView.extend({
+  template: '#formView',
   events: {
-    'click .button': 'onClickButton'
+    'click button': 'createNewEvent'
   },
-  regions: {
-    region1: '#region1',
-    region2: '#region2'
+  ui: {
+    event: '#event',
+    time: '#time'
   },
-  onRender() {
-      this.showChildView('region1', myView1);
-  },
-  onClickButton() {
-    this.showChildView('region2', myView2);
+  createNewEvent : function() {
+    this.collection.add({
+       event: this.ui.event.val(),
+       time: this.ui.time.val()
+    });
+    console.log(this.ui.time.val());
+     this.ui.event.val("");
+     this.ui.time.val("");
   }
 });
 
-const myView = new MyView();
-myView.render();
+EventTracker.addRegions({
+  form : '#form',
+  list : '#list'
+});
 
+EventTracker.addInitializer(function(){
+  EventTracker.events = new Events();
+  EventTracker.form.show(new FormView({collection: EventTracker.events}));
+  EventTracker.list.show(new EventView({collection: EventTracker.events}))
+});
+
+EventTracker.start();

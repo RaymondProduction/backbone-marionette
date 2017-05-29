@@ -39,20 +39,20 @@
  <script type="text/javascript">
  var ContactManager = new Marionette.Application();
 
- ContactManager.StaticView = Marionette.ItemView.extend({
-     el: "#main-region",
-     template: "#static-template",
-     events: {
-      'click button' :'clickButton'
-    },
-    clickButton : function(){
-      console.log('click');
-      var staticView = new ContactManager.StaticView({
-        template : "#click-template"
-      });
-      staticView.render();
-    }
-  });
+ // ContactManager.StaticView = Marionette.ItemView.extend({
+ //     el: "#main-region",
+ //     template: "#static-template",
+ //     events: {
+ //      'click button' :'clickButton'
+ //    },
+ //    clickButton : function(){
+ //      console.log('click');
+ //      var staticView = new ContactManager.StaticView({
+ //        template : "#click-template"
+ //      });
+ //      staticView.render();
+ //    }
+ //  });
 
 
 
@@ -63,6 +63,7 @@ ContactManager.Contact = Backbone.Model.extend({
 });
 
 ContactManager.ContactItemView = Marionette.ItemView.extend({
+  tagName: "li",
   template: "#contact-list-item"
  });
 
