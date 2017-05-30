@@ -1,0 +1,25 @@
+{
+  "name": "backbone-marionette",
+  "version": "1.0.0",
+  "description": "Training project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RaymondProduction/backbone-marionette.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RaymondProduction/backbone-marionette/issues"
+  },
+  "homepage": "https://github.com/RaymondProduction/backbone-marionette#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-build": "^0.5.3",
+    "gulp-minimize": "^1.0.0",
+    "gulp-rename": "^1.2.2"
+  }
+}
