@@ -1,75 +1,82 @@
-// Создание приложения Backbone.Marionette
-var EventTracker = new Backbone.Marionette.Application();
+ $(document).ready(function() {
+   // Создание приложения Marionette
+   var ReferenceWork = new Marionette.Application();
 
-// Приложение реализует список событий (Название и время)
+   // Определим шаблоны виджетов
+   ReferenceWork.OopView = Marionette.ItemView.extend({
+     template: '#oop'
+   });
+
+   ReferenceWork.SpView = Marionette.ItemView.extend({
+     template: '#sp'
+   });
+
+   ReferenceWork.PpView = Marionette.ItemView.extend({
+     template: '#pp'
+   });
+
+   // Предстартовые настройки
+   ReferenceWork.on("before:start", function() {
+     // Регион это контейнер для отображении виджета
+     var RegionContainer = Marionette.LayoutView.extend({
+       el: "#main_section",
+       regions: {
+         main: "#content"
+       }
+     });
+     ReferenceWork.regions = new RegionContainer();
+   });
+   // Старт приложения
+   ReferenceWork.on("start", function() {
+     // var oopView = new ReferenceWork.OopView();
+     // ReferenceWork.regions.main.show(oopView);
+
+     // запуск истории для маршрутизации
+     if (Backbone.history) {
+       Backbone.history.start();
+
+       if (Backbone.history.fragment === "") {
+         Backbone.history.navigate("opp");
+       }
+       var oopView = new ReferenceWork.OopView();
+       ReferenceWork.regions.main.show(oopView);
+     }
+   });
 
 
-// Модель для событий
-var Event = Backbone.Model.extend({});
-// Коллекция событий
-var Events = Backbone.Collection.extend({
-  model: Event
-});
+   // добавляем router маршрутизатор для приложения
+   ReferenceWork.module("ReferenceWorkApp", function(ReferenceWorkApp, ReferenceWork,
+     Backbone, Marionette, $, _) {
+     ReferenceWorkApp.Router = Marionette.AppRouter.extend({
+       appRoutes: {
+         "oop": "oppPage",
+         "pp": "ppPage",
+         "sp": "spPage"
+       }
+     });
 
-// Создаем виджет с событием по шаблону eventView
-// шаблон описан в html файле
-var EventView = Backbone.Marionette.ItemView.extend({
-  template: '#eventView'
-});
+     var API = {
+       oppPage: function() {
+         var oopView = new ReferenceWork.OopView();
+         ReferenceWork.regions.main.show(oopView);
+       },
+       ppPage: function() {
+         var ppView = new ReferenceWork.PpView();
+         ReferenceWork.regions.main.show(ppView);
+       },
+       spPage: function() {
+         var spView = new ReferenceWork.SpView();
+         ReferenceWork.regions.main.show(spView);
+       }
+     };
 
-// Виджет на случай если нет событий по шаблону noEventsView
-var NoEventsView = Backbone.Marionette.ItemView.extend({
-  template: '#noEventsView'
-});
+     ReferenceWorkApp.on("start", function() {
+       new ReferenceWorkApp.Router({
+         controller: API
+       });
+     });
+   });
+   // ^ router ^
 
-// Создаем коллекцию с элементами EventView
-var EventView = Backbone.Marionette.CollectionView.extend({
-  childView: EventView
-});
-
-// Виджет с формой
-var FormView = Backbone.Marionette.ItemView.extend({
-  template: '#formView',  // <= шаблон формы
-  events: {
-    'click button': 'createNewEvent' //<= событие нажатия кнопки
-  },
-  ui: {
-    event: '#event',
-    time: '#time'
-  },
-  createNewEvent : function() {
-    this.collection.add({
-       event: this.ui.event.val(),
-       time: this.ui.time.val()
-    });
-    console.log(this.ui.time.val());
-     this.ui.event.val("");
-     this.ui.time.val("");
-  }
-});
-
-EventTracker.addRegions({
-  form : '#form',
-  list : '#list'
-});
-
-EventTracker.addInitializer(function(){
-  EventTracker.events = new Events();
-  EventTracker.form.show(new FormView({collection: EventTracker.events}));
-  EventTracker.list.show(new EventView({collection: EventTracker.events}))
-});
-
-EventTracker.start();
-
-/*
-
-Routs
-
-HTML 5 - Routs
-  https://addyosmani.com/backbone-fundamentals/#routers
-
-HTML 5 - History
-  https://developer.mozilla.org/ru/docs/Web/API/History_API
-
-Gulp - task minimize and task build
-*/
+   ReferenceWork.start();
+ });
