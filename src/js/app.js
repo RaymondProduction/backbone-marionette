@@ -39,7 +39,6 @@
      // Backbone Marionette
      onStart: function() {
 
-       var self = this;
        // контроллер для отображения виджетов
        myController = {
          oopPage: function() {
@@ -71,8 +70,7 @@
        if (Backbone.history.fragment === "") {
          Backbone.history.navigate("opp");
        }
-       var main = self.getRegion();
-       main.show(new OopView);
+       showView(OopView);
      }
    });
 
