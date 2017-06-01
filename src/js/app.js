@@ -8,8 +8,6 @@
      // Backbone Marionette
      onStart: function() {
 
-
-
        var myRouter = new MyRouter();
        /** Starts the URL handling framework */
        Backbone.history.start();
@@ -19,8 +17,6 @@
        }
      }
    });
-
-
 
    const myApp = new App();
    myApp.start();
