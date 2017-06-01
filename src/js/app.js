@@ -14,15 +14,22 @@
    });
 
    // Функция дя вывода виджета в регионе #content
-   function showView(sameView) {
-     const MyView = Mn.View.extend({
+   function showView(sameTemplate) {
+
+     var SameView = Mn.View.extend({
+      template: sameTemplate
+     });
+
+     var sameView = new SameView();
+
+     var MyView = Mn.View.extend({
        el: '#main_section',
        template: false,
        regions: {
          region: '#content',
        },
        onRender() {
-         this.showChildView('region', new sameView);
+         this.showChildView('region', sameView);
        }
      });
      var myView = new MyView();
@@ -42,13 +49,13 @@
        // контроллер для отображения виджетов
        myController = {
          oopPage: function() {
-           showView(OopView);
+           showView('#oop');
          },
          ppPage: function() {
-           showView(PpView);
+           showView('#pp');
          },
          spPage: function() {
-           showView(SpView);
+           showView('#sp');
          }
        };
 
@@ -67,10 +74,9 @@
        /** Starts the URL handling framework */
        Backbone.history.start();
 
-       if (Backbone.history.fragment === "") {
-         Backbone.history.navigate("opp");
+       if (Backbone.history.fragment === '') {
+         Backbone.history.navigate('oop');
        }
-       showView(OopView);
      }
    });
 
