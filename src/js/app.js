@@ -4,18 +4,18 @@
    // шаблона
    // в регионе #content
    function showView(sameTemplate) {
-    // создаем конструктор виджета
+     // создаем конструктор виджета
      var SameView = Mn.View.extend({
-      template: sameTemplate
+       template: sameTemplate
      });
 
      // создали виджет
      var sameView = new SameView();
 
-    // указываем создаем виджет для визуализации
-    // в определенном регионе используя
-    // сконструированный в качестве
-    // дочернего
+     // указываем создаем виджет для визуализации
+     // в определенном регионе используя
+     // сконструированный в качестве
+     // дочернего
      var MyView = Mn.View.extend({
        el: '#main_section',
        template: false,
@@ -42,27 +42,15 @@
 
        // контроллер для отображения виджетов
        myController = {
-         oopPage: function() {
-            // шаблон с текстом об ООП
-           showView('#oop');
-         },
-         ppPage: function() {
-            // шаблон с текстом процедурного программирования
-           showView('#pp');
-         },
-         spPage: function() {
-           // шаблон с текстом структурного программирования
-           showView('#sp');
+         showVal: function(val) {
+           showView('#' + val);
          }
        };
-
        // Создаем роутер (маршрутизатор)
        var MyRouter = Mn.AppRouter.extend({
          controller: myController,
          appRoutes: {
-           'oop': 'oopPage',
-           'pp': 'ppPage',
-           'sp': 'spPage'
+           ':val': 'showVal'
          }
        })
 
