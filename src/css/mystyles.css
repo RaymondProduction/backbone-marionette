@@ -1,0 +1,227 @@
+﻿* {
+   margin: 0px;
+   padding: 0px;
+}
+body {
+  text-align:center;
+}
+
+img.teacher{
+  width:252px;
+  height:328px;
+}
+
+div.photo3xn {
+    width: 200px;
+    min-height: 300px;
+    padding-right: 10px;
+    padding-top: 20px;
+    padding-bottom:	10px;
+    border: solid 0px black;
+    float: left;
+   }
+img.photo3xn  {
+    padding-top: 20px;
+    width: 180px;
+    float: center;
+}
+
+div.photo2xn {
+    width: 340px;
+    min-height: 300px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom:	10px;
+    border: solid 0px black;
+    float: left;
+   }
+
+img.photo2xn  {
+    padding-top: 10px;
+    width: 320px;
+    float: center;
+}
+
+div.photo1xn {
+    width: 540px;
+    min-height: 400px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom:	10px;
+    border: solid 0px black;
+  float: center;
+  margin: auto; /* Выравниваем по центру */
+   }
+
+img.photo1xn  {
+    padding-top: 10px;
+    width: 520px;
+    float: center;
+  float: center;
+  margin: auto; /* Выравниваем по центру */
+}
+
+div.news {
+    width: 300px;
+    min-height: 250px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom:	10px;
+    border: solid 0px black;
+    float: left;
+   }
+
+img.news {
+    padding-top: 10px;
+    width: 280px;
+    float: center;
+}
+
+h1 {
+  font: bold 20px verdana, sans-serif;
+}
+header, section, footer, nav, aside, hgroup{
+  display: block;
+}
+/* Стили текста */
+.rcambria10 {font-size:10pt; color: #17365D;font-family:verdana, cambria, helvetica, sans-serif}
+.rcambria11 {font-size:11pt; color: #17365D;font-family:verdana, cambria, helvetica, sans-serif}
+.rcambria12 {font-size:12pt; color: #17365D;font-family:verdana, cambria, helvetica, sans-serif}
+.rcambria14 {font-size:14pt; color: #17365D;font-family:verdana, cambria, helvetica, sans-serif}
+p  {font-size:16pt;
+    color: #17365D;
+    font-family:verdana, cambria, helvetica, sans-serif;
+    text-align: justify;
+    margin-bottom: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom:	10px;
+   }
+ol {
+    font-size:11pt;
+    color: #17365D;
+    font-family:verdana, cambria, helvetica, sans-serif;
+    text-align: justify;
+   margin-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 20px;
+    padding-bottom:	10px;
+}
+h2 {font-size:14pt;
+    color: #17365D;
+    font-family:verdana, cambria, helvetica, sans-serif
+    font-weight: 600; /* Жирное начертание */
+    margin-bottom: 7px;
+    text-align: center;
+}
+h3 {font-size:12pt;
+    color: #17365D;
+    font-weight: 600; /* Жирное начертание */
+    font-family:verdana, cambria, helvetica, sans-serif
+   margin-bottom: 7px;
+}
+h4 {font-size:11pt;
+    color: #17365D;
+    font-weight: 600; /* Жирное начертание */
+    font-family:verdana, cambria, helvetica, sans-serif;
+    margin-bottom: 14px;
+}
+h5 {
+    color: #17365D;
+    font-family:verdana, cambria, helvetica, sans-serif;
+    margin-bottom: 14px;
+    text-align: center;
+    font-size:14pt;
+    font-weight: 400;
+}
+#wrapper {
+ float: center;
+ width: 980px;
+ margin: auto; /* Выравниваем по центру */
+ border: solid 1px black;
+}
+#main_header {
+  font-family:verdana, cambria, helvetica, sans-serif;
+  background: #FFFFFF;
+  border: solid 0px black;
+  font-size:20pt;
+}
+#main_menu {
+  font-family:verdana, cambria, helvetica, sans-serif;
+  height: 100px;
+  width: 256px;
+  background: #D7EAF7;
+  float: left;
+  padding: 5px, 15px;
+  text-align:left;
+  border: solid 0px black;
+}
+#main_menu li {
+    font-family:verdana, cambria, helvetica, sans-serif;
+    display: inherit;;
+    list-style: none;
+    padding: 0px;
+    font: blod 14px verdana, sans-serif;
+}
+#main_section{
+
+    border: solid 0px black;
+    position: relative;
+    background: #FFFFFF;
+    float: left;
+    padding: 10px;
+    width: 704px;
+    min-height: 600px;
+    margin: 0px;
+    text-align:center;
+}
+#main_aside{
+    float: left;
+    width: 220px;
+    margin: 20px, 0px;
+    padding: 20px;
+    background: #CCCCCC;
+}
+#main_footer {
+    clear: both;
+    background: #CCCCFF;
+    text-align: center;
+    width: 980px;
+    height: 46px;
+    padding: 0px;
+    border: solid 1px black;
+   font-family:verdana, cambria, helvetica, sans-serif;
+}
+#content{
+  padding: 10px;
+   width: 700px;
+  /*min-height: 100px;*/
+  font-size: 11pt;
+  color: #17365D;
+  font-family:verdana, cambria, helvetica, sans-serif;
+  float: center;
+  margin: auto; /* Выравниваем по центру */
+  border: solid 0px black;
+  text-align: center;
+}
+#page_div{
+ font-size:11pt;
+ color: #17365D;
+ font-family:verdana, cambria, helvetica, sans-serif;
+ clear: both; /* Чтоб блок был внизу */
+ float: center;
+ width: 600px;
+ margin: auto; /* Выравниваем по центру */
+ border: solid 0px black;
+ text-align: center;
+}
+ul{
+  text-align:left;
+  margin-left: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 20px;
+  padding-bottom:	10px;
+}

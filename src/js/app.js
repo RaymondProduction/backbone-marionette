@@ -1,28 +1,65 @@
+ $(document).ready(function() {
+   // шаблон с текстом об ООП
+   const OopView = Mn.View.extend({
+     template: '#oop'
+   });
+   const PpView = Mn.View.extend({
+     template: '#pp'
+   });
+   const SpView = Mn.View.extend({
+     template: '#sp'
+   });
 
-const template1 = _.template('<h1>Marionette says hello!</h1>');
-const template2 = _.template('<h1>You push the button!</h1>');
+   // Настраиваем приложение Backbone Marionette
+   var App = Mn.Application.extend({
+     region: '#content', // указываем регион
 
-const myView1 = new Mn.View({template: template1});
-const myView2 = new Mn.View({template: template2});
+     // эта функция срабатывает во время запуска приложения
+     // Backbone Marionette
+     onStart: function() {
 
-const MyView = Mn.View.extend({
-  el: '#container',
-  template: false,
-  events: {
-    'click .button': 'onClickButton'
-  },
-  regions: {
-    region1: '#region1',
-    region2: '#region2'
-  },
-  onRender() {
-      this.showChildView('region1', myView1);
-  },
-  onClickButton() {
-    this.showChildView('region2', myView2);
-  }
-});
+       var self = this;
+       // контроллер для отображения виджетов
+       myController = {
+         oopPage: function() {
+           var main = self.getRegion();
+           main.show(new OopView);
+         },
+         ppPage: function() {
+           var main = self.getRegion();
+           main.show(new PpView);
+         },
+         spPage: function() {
+           var main = self.getRegion();
+           main.show(new SpView);
+         }
+       };
 
-const myView = new MyView();
-myView.render();
+       // Создаем роутер (маршрутизатор)
+       var MyRouter = Mn.AppRouter.extend({
+         controller: myController,
+         appRoutes: {
+           'oop': 'oopPage',
+           'pp': 'ppPage',
+           'sp': 'spPage'
+         }
+       })
 
+
+       var myRouter = new MyRouter();
+       /** Starts the URL handling framework */
+       Backbone.history.start();
+
+       if (Backbone.history.fragment === "") {
+         Backbone.history.navigate("opp");
+       }
+       var main = self.getRegion();
+       main.show(new OopView);
+     }
+   });
+
+
+
+   const myApp = new App();
+   myApp.start();
+ });
