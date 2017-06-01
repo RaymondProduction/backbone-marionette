@@ -3,12 +3,33 @@
    const OopView = Mn.View.extend({
      template: '#oop'
    });
+   // шаблон с текстом процедурного программирования
    const PpView = Mn.View.extend({
      template: '#pp'
    });
+
+   // шаблон с текстом структурного программирования
    const SpView = Mn.View.extend({
      template: '#sp'
    });
+
+   // Функция дя вывода виджета в регионе #content
+   function showView(sameView) {
+     const MyView = Mn.View.extend({
+       el: '#main_section',
+       template: false,
+       regions: {
+         region: '#content',
+       },
+       onRender() {
+         this.showChildView('region', new sameView);
+       }
+     });
+     var myView = new MyView();
+     myView.render();
+   }
+
+
 
    // Настраиваем приложение Backbone Marionette
    var App = Mn.Application.extend({
@@ -22,16 +43,13 @@
        // контроллер для отображения виджетов
        myController = {
          oopPage: function() {
-           var main = self.getRegion();
-           main.show(new OopView);
+           showView(OopView);
          },
          ppPage: function() {
-           var main = self.getRegion();
-           main.show(new PpView);
+           showView(PpView);
          },
          spPage: function() {
-           var main = self.getRegion();
-           main.show(new SpView);
+           showView(SpView);
          }
        };
 
