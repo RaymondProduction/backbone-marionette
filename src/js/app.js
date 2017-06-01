@@ -1,27 +1,21 @@
  $(document).ready(function() {
-   // шаблон с текстом об ООП
-   const OopView = Mn.View.extend({
-     template: '#oop'
-   });
-   // шаблон с текстом процедурного программирования
-   const PpView = Mn.View.extend({
-     template: '#pp'
-   });
 
-   // шаблон с текстом структурного программирования
-   const SpView = Mn.View.extend({
-     template: '#sp'
-   });
-
-   // Функция дя вывода виджета в регионе #content
+   // Функция для вывода виджета по идентификатору
+   // шаблона
+   // в регионе #content
    function showView(sameTemplate) {
-
+    // создаем конструктор виджета
      var SameView = Mn.View.extend({
       template: sameTemplate
      });
 
+     // создали виджет
      var sameView = new SameView();
 
+    // указываем создаем виджет для визуализации
+    // в определенном регионе используя
+    // сконструированный в качестве
+    // дочернего
      var MyView = Mn.View.extend({
        el: '#main_section',
        template: false,
@@ -49,12 +43,15 @@
        // контроллер для отображения виджетов
        myController = {
          oopPage: function() {
+            // шаблон с текстом об ООП
            showView('#oop');
          },
          ppPage: function() {
+            // шаблон с текстом процедурного программирования
            showView('#pp');
          },
          spPage: function() {
+           // шаблон с текстом структурного программирования
            showView('#sp');
          }
        };
